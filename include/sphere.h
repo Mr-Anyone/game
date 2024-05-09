@@ -14,6 +14,8 @@
 #include <math.h>
 #include <vector>
 
+constexpr float PI = 3.1416926; 
+
 class LightingSphere {
 public:
   LightingSphere(float radius, int resolution)
@@ -27,7 +29,7 @@ public:
     m_indicies.clear();
 
     float delta_y = (radius * 2) / resolution;
-    float delta_theta = 2 * M_PI / resolution;
+    float delta_theta = 2 * PI / resolution;
 
     // two times resolution since we want a sphere and not a semi sphere
     for (int i = 1; i <= resolution; ++i) {
