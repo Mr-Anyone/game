@@ -19,12 +19,13 @@
 #include "printing.h"
 #include "ds.h"
 #include "ecs.h"
+#include "quadtree.h"
 #include "shader.h"
 #include "sphere.h"
 #include "cube.h"
 
-constexpr int width = 3840;
-constexpr int height = 2160;
+constexpr int width = 1920;
+constexpr int height = 1080;
 
 glm::mat4 projection = glm::perspective(
     glm::radians(45.0f), (float)width / (float)height, 0.1f, 10000.0f);
@@ -128,9 +129,9 @@ void processInput(GLFWwindow *window) {
     camPos += glm::normalize(glm::cross(front, up)) * cameraSpeed;
 
   static int mode = GLFW_CURSOR_DISABLED;
-  static int last_update_time = glfwGetTime();
+  static float last_update_time = glfwGetTime();
   if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS &&
-      glfwGetTime() - last_update_time > 1) {
+      glfwGetTime() - last_update_time > 0.1f) {
     if (mode == GLFW_CURSOR_NORMAL)
       mode = GLFW_CURSOR_DISABLED;
 
@@ -267,10 +268,10 @@ void render_imgui(DiamondSquareMesh &mesh, Shader &shader, RigidBody &body) {
 void apply_user_force(GLFWwindow *window, ComponentArray<RigidBody> &bodies) {
   float force_magnitude = 1.0f; // 10 N
   glm::vec3 push_location =
-      glm::vec3(0.0f, 1.0f,
-                0.0f); // a little bit above the box to create a bit of torque!
+      glm::vec3(1.0f, 1.0f,
+                1.0f); // a little bit above the box to create a bit of torque!
 
-  glm::vec3 applied_force = force_magnitude * glm::normalize(front);
+  glm::vec3 applied_force = force_magnitude * glm::normalize(push_location);
   bodies.getComponent(0).net_force += applied_force;
   bodies.getComponent(0).net_torque +=
       glm::cross(push_location, glm::vec3(0.0, 0.0, force_magnitude));
@@ -307,7 +308,7 @@ int main() {
   shader.setMat4("projection", projection);
 
   LightingSphere sphere(10, 100);
-  DiamondSquareMesh mesh(2);
+  DiamondSquareMesh mesh(7);
 
   glfwSetCursorPosCallback(window, mouse_callback);
 
@@ -337,7 +338,7 @@ int main() {
 
   float last_time = glfwGetTime();
   while (!glfwWindowShouldClose(window)) {
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // apply force
@@ -347,10 +348,11 @@ int main() {
     render_imgui(mesh, shader, rigid_bodies.getComponent(0));
 
     integrate(rigid_bodies, glfwGetTime() - last_time);
+
     // rendering my stuff
-    // shader.use();
-    // shader.setMat4("view", view);
-    // mesh.renderMesh();
+    shader.use();
+    shader.setMat4("view", view);
+    mesh.renderMesh();
     // sphere.render(projection, view, lightPos, lightColor);
     some_cube.renderCube(rigid_bodies.getComponent(0));
 

@@ -58,6 +58,7 @@ static void integrateOneBody(RigidBody &body, float time_delta) {
   body.inverse_inertia_tensor = body.orientation * body.inverse_inertia_tensor *
                                 glm::transpose(body.orientation);
 
+  // reset the forces
   body.net_force = glm::vec3(0.0f);
   body.net_torque = glm::vec3(0.0f);
 }

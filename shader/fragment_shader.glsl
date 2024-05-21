@@ -18,6 +18,6 @@ void main(){
     
 
     float diffuse = max(dot(normalize(lightPos - pos), normal), 0.0);
-    //FragColor = vec4(objectColor*(min(ambient + diffuse, 1.0)), 1.0f); 
-    FragColor = vec4(0.0f, 0.0f, 0.0f, 0.0f); 
+    FragColor = vec4(objectColor*(min(ambient + diffuse, 1.0)), 1.0f); 
+    //FragColor = vec4(0.0f, 0.0f, 0.0f, 0.0f); 
 }

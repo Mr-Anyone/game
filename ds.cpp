@@ -108,7 +108,7 @@ DiamondSquareMesh::DiamondSquareMesh(unsigned int size) {
   m_vertices = nullptr;
   m_range = 10.0;
 
-  generateMesh(size, 10, 1.0, 5.0, 0.0);
+  generateMesh(size, 100, 10, 50, -20);
 }
 
 DiamondSquareMesh::DiamondSquareMesh(DiamondSquareMesh &mesh) {
