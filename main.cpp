@@ -16,7 +16,6 @@
 #include <imgui_impl_opengl3.h>
 
 #include "physics.h"
-#include "printing.h"
 #include "ds.h"
 #include "ecs.h"
 #include "quadtree.h"
@@ -81,10 +80,10 @@ public:
 
   void renderCube(const RigidBody &body) {
     glm::mat4 model = make4xRotationMatrx(body.orientation);
-    // model = glm::scale(glm::mat4(1.0f), glm::vec3(5.0, 5.0, 5.0)) * model;
-    // model = glm::translate(glm::mat4(1.0), body.pos) * model;
+    model = glm::scale(glm::mat4(1.0f), glm::vec3(5.0, 5.0, 5.0)) * model;
+    model = glm::translate(glm::mat4(1.0), body.pos) * model;
     // printMat(model, 4);
-    // printMat(body.orientation, 3);
+    //     printMat(body.orientation, 3);
 
     m_shader.use();
     m_shader.setMat4("model", model);
@@ -203,7 +202,7 @@ void lightingImGUI(Shader &shader) {
   ImGui::Text("Object Color");
   static float objc[3] = {0.5, 0.5, 0.5};
   static float lightc[3] = {0.52, 0.52, 0.52};
-  static float pos[3] = {0, 0, 0};
+  static float pos[3] = {0, 1000.0f, 0};
 
   ImGui::DragFloat3("Object Color", objc, 0.01f, 0.0, 1.0);
   ImGui::DragFloat3("Light Color", lightc, 0.01f, 0.0, 1.0);
@@ -241,7 +240,7 @@ void render_imgui(DiamondSquareMesh &mesh, Shader &shader, RigidBody &body) {
   ImGui::SliderInt("Size", &size, 7, 11);
 
   static float range = 1.0f;
-  ImGui::SliderFloat("range", &range, 0.0f, 100.0f);
+  ImGui::SliderFloat("range", &range, 0.0f, 3000.0f);
   mesh.setRange(range);
 
   if (ImGui::Button("Generate"))
@@ -336,6 +335,29 @@ int main() {
   rigid_bodies.appendComponent(0, makeBoxRigidBody(1, 0.5));
   Cube some_cube;
 
+  // glEnable(GL_CULL_FACE);
+  // glCullFace(GL_FRONT);
+
+  std::vector<TriangleMesh> forQuadTree = mesh.makeTriangleMesh();
+  QuadTree<TriangleMesh> tree{Square(glm::vec2(-10, -10), 3000)};
+  for (auto &mesh : forQuadTree) {
+    tree.insert(glm::vec2(mesh.center.x, mesh.center.z), mesh);
+  }
+  std::cout << "I've made a tree?" << std::endl;
+
+  std::vector<TriangleMesh> test;
+  tree.query(glm::vec2(0, 0), test);
+   for (int i = 0; i < test.size(); ++i) {
+     std::cout << test[i].center.x << ",";
+     std::cout << test[i].center.y << ",";
+     std::cout << test[i].center.z << std::endl;
+   }
+
+   std::cout << forQuadTree.size() << std::endl;
+   std::cout << test.size() << std::endl;
+
+   exit(-1);
+
   float last_time = glfwGetTime();
   while (!glfwWindowShouldClose(window)) {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -353,6 +375,7 @@ int main() {
     shader.use();
     shader.setMat4("view", view);
     mesh.renderMesh();
+    rigid_bodies.getComponent(0).pos = lightPos;
     // sphere.render(projection, view, lightPos, lightColor);
     some_cube.renderCube(rigid_bodies.getComponent(0));
 

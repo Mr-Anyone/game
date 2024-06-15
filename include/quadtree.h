@@ -4,6 +4,7 @@
 #include "collision.h"
 #include <memory>
 #include <vector>
+#include "ecs.h"
 
 template <typename T>
 struct Node {
@@ -31,7 +32,7 @@ public:
 private:
   void initAllFourCorner();
 
-  static constexpr int THRESHOLD = 20;
+  static constexpr int THRESHOLD = 4;
   Square m_square;
   std::vector<Node<T>> m_array;
   std::unique_ptr<QuadTree> m_top_left, m_top_right, m_bottom_left,
@@ -39,4 +40,5 @@ private:
 };
 
 template class QuadTree<double>;
+template class QuadTree<TriangleMesh>;
 #endif

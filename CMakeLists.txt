@@ -10,15 +10,15 @@ set(CMAKE_BUILD_TYPE Debug)
 add_subdirectory(vendor)
 
 
-add_executable(main main.cpp ds.cpp ecs.cpp physics.cpp solve.cpp quad_tree.cpp)
+add_executable(main main.cpp ds.cpp ecs.cpp physics.cpp solve.cpp quad_tree.cpp collision.cpp)
 target_link_libraries(main glfw glm libglad imgui)
 target_include_directories(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-add_executable(test_ecs test/test_ecs.cpp ecs.cpp quad_tree.cpp)
+add_executable(test_ecs test/test_ecs.cpp ecs.cpp quad_tree.cpp collision.cpp)
 target_link_libraries(test_ecs glm)
 target_include_directories(test_ecs PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-add_executable(test_collision_solver test/collision_solver_test.cpp physics.cpp ecs.cpp solve.cpp quad_tree.cpp)
+add_executable(test_collision_solver test/collision_solver_test.cpp physics.cpp ecs.cpp solve.cpp quad_tree.cpp collision.cpp)
 target_link_libraries(test_collision_solver glm libglad glfw)
 target_include_directories(test_collision_solver PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 

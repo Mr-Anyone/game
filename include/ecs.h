@@ -36,7 +36,9 @@ struct TriangleMesh {
   // c---------c
   glm::vec3 normal; // should this be a pointer instead?
   glm::vec3 center;
-  glm::vec3 indicies; // (a, b, c)
+
+  explicit TriangleMesh( const glm::vec3 &center, const glm::vec3 &normal)
+      : normal{normal}, center{center} {}
 };
 
 template <typename T>

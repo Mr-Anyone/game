@@ -9,8 +9,10 @@ QuadTree<T>::QuadTree(const Square &square)
 
 template <typename T>
 void QuadTree<T>::insert(const glm::vec2 &point, const T &obj) {
-  assert(isPointInSquare(m_square, point) &&
-         "Your point is outside of the rectangle of the quadtree!");
+  if (!isPointInSquare(m_square, point)) {
+    assert(isPointInSquare(m_square, point) &&
+           "Your point is outside of the rectangle of the quadtree!");
+  }
   if (m_array.size() < THRESHOLD) {
     m_array.emplace_back(Node(point, obj));
     return;

@@ -1,4 +1,5 @@
 #include <iostream>
+#include "glm/fwd.hpp"
 #include "quadtree.h"
 
 void quad_tree_test() {
@@ -47,12 +48,28 @@ void quad_tree_test_2() {
     assert(result[i] == 123.1);
   }
 
-  std::cout << "I passed second test. Yay" << std::endl; 
+  std::cout << "I passed second test. Yay" << std::endl;
 }
-
 int main() {
   quad_tree_test();
   quad_tree_test_2();
 
+  // struct Stuff {
+  //   glm::vec2 x;
+  //   glm::vec3 y;
+  // };
+
+  // Stuff a{glm::vec2(1, 1), glm::vec3(12, 1, 12)};
+  // Stuff b{glm::vec2(1123, 1), glm::vec3(12, 1, 12)};
+  // std::vector<Stuff> d = {a, b};
+  // float *c = reinterpret_cast<float *>(&d[0]);
+
+  // assert(*c == 1);
+  // assert(*(c + 1) == 1);
+  // assert(*(c + 2) == 12);
+  // assert(*(c + 3) == 1);
+  // assert(*(c + 4) == 12);
+  // assert(*(c + 5) == 1123);
+  // std::cout << "some testing done" << std::endl;
   return 0;
 }
