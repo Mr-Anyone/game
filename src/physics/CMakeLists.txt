@@ -4,6 +4,7 @@ add_library(
     physics
     physics.cpp
     solve.cpp
+    collision.cpp
 )
 
 target_link_libraries(physics PRIVATE glm glad ecs)
