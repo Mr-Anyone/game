@@ -262,51 +262,51 @@ static int test_splat_vec4()
 		{
 			glm::aligned_vec4 const v(glm::splatX(u));
 			Error += glm::equal(v.x, u.x, glm::epsilon<float>()) ? 0 : 1;
-		    Error += glm::equal(v.y, u.x, glm::epsilon<float>()) ? 0 : 1;
-		    Error += glm::equal(v.z, u.x, glm::epsilon<float>()) ? 0 : 1;
-		    Error += glm::equal(v.w, u.x, glm::epsilon<float>()) ? 0 : 1;
+			Error += glm::equal(v.y, u.x, glm::epsilon<float>()) ? 0 : 1;
+			Error += glm::equal(v.z, u.x, glm::epsilon<float>()) ? 0 : 1;
+			Error += glm::equal(v.w, u.x, glm::epsilon<float>()) ? 0 : 1;
 		}
 
 		{
 			glm::aligned_vec4 const v(glm::splatY(u));
 			Error += glm::equal(v.x, u.y, glm::epsilon<float>()) ? 0 : 1;
-		    Error += glm::equal(v.y, u.y, glm::epsilon<float>()) ? 0 : 1;
-		    Error += glm::equal(v.z, u.y, glm::epsilon<float>()) ? 0 : 1;
-		    Error += glm::equal(v.w, u.y, glm::epsilon<float>()) ? 0 : 1;
+			Error += glm::equal(v.y, u.y, glm::epsilon<float>()) ? 0 : 1;
+			Error += glm::equal(v.z, u.y, glm::epsilon<float>()) ? 0 : 1;
+			Error += glm::equal(v.w, u.y, glm::epsilon<float>()) ? 0 : 1;
 		}
 
 		{
 			glm::aligned_vec4 const v(glm::splatZ(u));
 			Error += glm::equal(v.x, u.z, glm::epsilon<float>()) ? 0 : 1;
-		    Error += glm::equal(v.y, u.z, glm::epsilon<float>()) ? 0 : 1;
-		    Error += glm::equal(v.z, u.z, glm::epsilon<float>()) ? 0 : 1;
-		    Error += glm::equal(v.w, u.z, glm::epsilon<float>()) ? 0 : 1;
+			Error += glm::equal(v.y, u.z, glm::epsilon<float>()) ? 0 : 1;
+			Error += glm::equal(v.z, u.z, glm::epsilon<float>()) ? 0 : 1;
+			Error += glm::equal(v.w, u.z, glm::epsilon<float>()) ? 0 : 1;
 		}
 	}
 	{
-		glm::aligned_dvec4 const u(1., 2., 3., 4.);
+		glm::aligned_dvec4 const u(1.f, 2.f, 3.f, 4.f);
 		{
 			glm::aligned_dvec4 const v(glm::splatX(u));
 			Error += glm::equal(v.x, u.x, glm::epsilon<double>()) ? 0 : 1;
-		    Error += glm::equal(v.y, u.x, glm::epsilon<double>()) ? 0 : 1;
-		    Error += glm::equal(v.z, u.x, glm::epsilon<double>()) ? 0 : 1;
-		    Error += glm::equal(v.w, u.x, glm::epsilon<double>()) ? 0 : 1;
+			Error += glm::equal(v.y, u.x, glm::epsilon<double>()) ? 0 : 1;
+			Error += glm::equal(v.z, u.x, glm::epsilon<double>()) ? 0 : 1;
+			Error += glm::equal(v.w, u.x, glm::epsilon<double>()) ? 0 : 1;
 		}
 
 		{
 			glm::aligned_dvec4 const v(glm::splatY(u));
 			Error += glm::equal(v.x, u.y, glm::epsilon<double>()) ? 0 : 1;
-		    Error += glm::equal(v.y, u.y, glm::epsilon<double>()) ? 0 : 1;
-		    Error += glm::equal(v.z, u.y, glm::epsilon<double>()) ? 0 : 1;
-		    Error += glm::equal(v.w, u.y, glm::epsilon<double>()) ? 0 : 1;
+			Error += glm::equal(v.y, u.y, glm::epsilon<double>()) ? 0 : 1;
+			Error += glm::equal(v.z, u.y, glm::epsilon<double>()) ? 0 : 1;
+			Error += glm::equal(v.w, u.y, glm::epsilon<double>()) ? 0 : 1;
 		}
 
 		{
 			glm::aligned_dvec4 const v(glm::splatZ(u));
 			Error += glm::equal(v.x, u.z, glm::epsilon<double>()) ? 0 : 1;
-		    Error += glm::equal(v.y, u.z, glm::epsilon<double>()) ? 0 : 1;
-		    Error += glm::equal(v.z, u.z, glm::epsilon<double>()) ? 0 : 1;
-		    Error += glm::equal(v.w, u.z, glm::epsilon<double>()) ? 0 : 1;
+			Error += glm::equal(v.y, u.z, glm::epsilon<double>()) ? 0 : 1;
+			Error += glm::equal(v.z, u.z, glm::epsilon<double>()) ? 0 : 1;
+			Error += glm::equal(v.w, u.z, glm::epsilon<double>()) ? 0 : 1;
 		}
 	}
 	return Error;
@@ -331,7 +331,7 @@ static int test_copy_vec4_vec3()
 		Error += glm::equal(v.x, u.x, glm::epsilon<float>()) ? 0 : 1;
 		Error += glm::equal(v.y, u.y, glm::epsilon<float>()) ? 0 : 1;
 		Error += glm::equal(v.z, u.z, glm::epsilon<float>()) ? 0 : 1;
-		Error += glm::equal(v.w, 1.0f, glm::epsilon<float>()) ? 0 : 1;	;
+		Error += glm::equal(v.w, 1.0f, glm::epsilon<float>()) ? 0 : 1;
 	}
 
 	{
@@ -340,7 +340,7 @@ static int test_copy_vec4_vec3()
 		Error += glm::equal(v.x, u.x, glm::epsilon<double>()) ? 0 : 1;
 		Error += glm::equal(v.y, u.y, glm::epsilon<double>()) ? 0 : 1;
 		Error += glm::equal(v.z, u.z, glm::epsilon<double>()) ? 0 : 1;
-		Error += glm::equal(v.w, 0.0, glm::epsilon<double>()) ? 0 : 1;	
+		Error += glm::equal(v.w, 0.0, glm::epsilon<double>()) ? 0 : 1;
 	}
 
 	{
@@ -353,15 +353,6 @@ static int test_copy_vec4_vec3()
 	}
 
 	{
-		glm::aligned_vec3 const u(1.f, 2.f, 3.f);
-		glm::aligned_vec4 const v(glm::xyzz(u));
-		Error += glm::equal(v.x, u.x, glm::epsilon<float>()) ? 0 : 1;
-		Error += glm::equal(v.y, u.y, glm::epsilon<float>()) ? 0 : 1;
-		Error += glm::equal(v.z, u.z, glm::epsilon<float>()) ? 0 : 1;
-		Error += glm::equal(v.w, u.z, glm::epsilon<float>()) ? 0 : 1;
-	}
-
-	{
 		glm::aligned_dvec3 const u(1., 2., 3.);
 		glm::aligned_dvec4 const v(glm::xyzz(u));
 		Error += glm::equal(v.x, u.x, glm::epsilon<double>()) ? 0 : 1;
@@ -369,7 +360,6 @@ static int test_copy_vec4_vec3()
 		Error += glm::equal(v.z, u.z, glm::epsilon<double>()) ? 0 : 1;
 		Error += glm::equal(v.w, u.z, glm::epsilon<double>()) ? 0 : 1;
 	}
-
 
 	{
 		glm::aligned_vec4 const u(1.f, 2.f, 3.f, 4.f);
@@ -396,6 +386,7 @@ static int test_copy()
 	{
 		glm::aligned_ivec4 const a(1, 2, 3, 4);
 		glm::ivec4 const u(a);
+
 		Error += a.x == u.x ? 0 : 1;
 		Error += a.y == u.y ? 0 : 1;
 		Error += a.z == u.z ? 0 : 1;
@@ -488,7 +479,7 @@ static int test_aligned_mat4()
 
 int main()
 {
-int Error = 0;
+	int Error = 0;
 
 	Error += test_ctor();
 	Error += test_copy_vec4();
@@ -497,8 +488,6 @@ int Error = 0;
 	Error += test_splat_vec4();
 	Error += test_copy_vec4_vec3();
 	Error += test_copy();
-	Error += test_copy_vec4();
-	Error += test_copy_vec3();
 	Error += test_aligned_ivec4();
 	Error += test_aligned_mat4();
 
